@@ -27,3 +27,13 @@ module "security_groups" {
   source = "../modules/security-group"
   vpc_id = module.vpc.vpc_id
 }
+
+# Creating Application Load balancer
+module "alb" {
+  source        = "../modules/alb"
+  project_name  = module.vpc.project_name
+  alb_sg        = module.security_groups.alb_sg
+  pub_sub_1a_id = module.vpc.pub_sub_1a_id
+  pub_sub_2b_id = module.vpc.pub_sub_2b_id
+  vpc_id        = module.vpc.vpc_id
+}
